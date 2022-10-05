@@ -6,5 +6,6 @@ namespace workout_tracker_backend.Models
         public List<SetSession>? SetSessions { get; set; }
         public WorkoutSession WorkoutSession { get; set; }
         public Exercise Exercise { get; set; }
+        public int ExerciseId { get; set; }
     }
 }

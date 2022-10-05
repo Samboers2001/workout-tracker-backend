@@ -6,6 +6,8 @@ namespace workout_tracker_backend.Models
         public int Reps { get; set; }
         public decimal Weight { get; set; }
         public ExerciseSession ExerciseSession { get; set; }
+        public int ExerciseSessionId { get; set; }
         public Set Set { get; set; }
+        public int SetId { get; set; }
     }
 }

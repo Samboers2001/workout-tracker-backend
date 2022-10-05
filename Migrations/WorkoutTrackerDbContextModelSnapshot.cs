@@ -32,7 +32,7 @@ namespace workout_tracker_backend.Migrations
                     b.ToTable("ExerciseWorkout");
                 });
 
-            modelBuilder.Entity("workout_tracker_backend.Category", b =>
+            modelBuilder.Entity("workout_tracker_backend.Models.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -60,7 +60,7 @@ namespace workout_tracker_backend.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("UserId")
+                    b.Property<int>("UserId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
@@ -181,7 +181,7 @@ namespace workout_tracker_backend.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("UserId")
+                    b.Property<int>("UserId")
                         .HasColumnType("INTEGER");
 
                     b.Property<TimeSpan>("WorkoutTime")
@@ -242,7 +242,7 @@ namespace workout_tracker_backend.Migrations
 
             modelBuilder.Entity("workout_tracker_backend.Models.Exercise", b =>
                 {
-                    b.HasOne("workout_tracker_backend.Category", "Category")
+                    b.HasOne("workout_tracker_backend.Models.Category", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -250,7 +250,9 @@ namespace workout_tracker_backend.Migrations
 
                     b.HasOne("workout_tracker_backend.Models.User", "User")
                         .WithMany("Exercises")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Category");
 
@@ -310,7 +312,9 @@ namespace workout_tracker_backend.Migrations
                 {
                     b.HasOne("workout_tracker_backend.Models.User", "User")
                         .WithMany("Workouts")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("User");
                 });

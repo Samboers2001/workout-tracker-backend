@@ -16,6 +16,7 @@ namespace workout_tracker_backend.Data
         public DbSet<WorkoutSession> WorkoutSessions { get; set; }
         public DbSet<ExerciseSession> ExerciseSessions { get; set; }
         public DbSet<SetSession> SetSessions { get; set; }
+        public DbSet<Category> Category { get; set; }
 
     }
 }
