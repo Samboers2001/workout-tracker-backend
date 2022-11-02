@@ -14,7 +14,14 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<WorkoutTrackerDbContext>(options => options.UseSqlite(Configurations.GetConnectionString("WorkoutTrackerConnection")));
-
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("MyAllowedOrigins",
+    policy => 
+    {
+        policy.WithOrigins("http://127.0.0.1:5173");
+    });
+});
 
 builder.Services.AddScoped<IExercise,ExerciseRepo>();
 
@@ -28,6 +35,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("MyAllowedOrigins");
 
 app.UseAuthorization();
 
