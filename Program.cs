@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using workout_tracker_backend.Authorization;
 using workout_tracker_backend.Data;
 using workout_tracker_backend.Interfaces;
 using workout_tracker_backend.Repositories;
@@ -24,6 +25,8 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.AddScoped<IExercise,ExerciseRepo>();
+builder.Services.AddScoped<IJwtUtils, JwtUtils>();
+builder.Services.AddScoped<IUser, UserRepo>();
 
 var app = builder.Build();
 
