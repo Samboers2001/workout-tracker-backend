@@ -5,6 +5,7 @@ using workout_tracker_backend.Helpers;
 using workout_tracker_backend.Interfaces;
 using workout_tracker_backend.Repositories;
 
+
 var builder = WebApplication.CreateBuilder(args);
 IConfiguration Configurations = builder.Configuration;
 
@@ -15,12 +16,20 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<WorkoutTrackerDbContext>(options => options.UseSqlite(Configurations.GetConnectionString("WorkoutTrackerConnection")));
-
-
 builder.Services.AddScoped<IExercise,ExerciseRepo>();
 builder.Services.AddScoped<IJwtUtils, JwtUtils>();
 builder.Services.AddScoped<IUser, UserRepo>();
+builder.Services.AddDbContext<WorkoutTrackerDbContext>(options => options.UseSqlite(Configurations.GetConnectionString("WorkoutTrackerConnection")));
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("MyAllowedOrigins",
+    policy => 
+    {
+        policy.WithOrigins("http://localhost:8080").AllowAnyHeader();
+    });
+});
+
+
 
 var app = builder.Build();
 
@@ -32,13 +41,12 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseMiddleware<JwtMiddelware>();
-app.UseMiddleware<ErrorHandlerMiddleware>();
 
-app.UseCors(x => x
-.AllowAnyOrigin()
-.AllowAnyMethod()
-.AllowAnyHeader());
+app.UseCors("MyAllowedOrigins");
+
+app.UseMiddleware<JwtMiddelware>();
+
+app.UseMiddleware<ErrorHandlerMiddleware>();
 
 app.UseAuthorization();
 
