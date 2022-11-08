@@ -10,6 +10,7 @@ namespace workout_tracker_backend.Profiles
         {
             CreateMap<User, UserReadDto>();
             CreateMap<UserCreateDto, User>();
+            CreateMap<User, AuthenticateResponse>();
         }
     }
 }

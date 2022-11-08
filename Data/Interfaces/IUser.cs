@@ -7,7 +7,7 @@ namespace workout_tracker_backend.Interfaces
     {
         int Register(UserCreateDto userCreateDto);
         User GetUserById(int Id);
-
+        AuthenticateResponse Authenticate(AuthenticateRequest authenticateRequest);
 
     }
 }

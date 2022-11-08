@@ -2,7 +2,6 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using workout_tracker_backend.Interfaces;
 using workout_tracker_backend.Dtos;
-using workout_tracker_backend.Authorization;
 
 namespace workout_tracker_backend.Controllers
 {
@@ -34,12 +33,19 @@ namespace workout_tracker_backend.Controllers
         }
 
         //POST api/user/register
-        [AllowAnonymous]
         [HttpPost("register")]
         public ActionResult Register(UserCreateDto userCreateDto)
         {
             int userId = _repository.Register(userCreateDto);
             return Ok(userId);
+        }
+
+        // POST api/user/authenticate
+        [HttpPost("authenticate")]
+        public ActionResult Authenticate(AuthenticateRequest authenticateRequest)
+        {
+            var response = _repository.Authenticate(authenticateRequest);
+            return Ok(response);
         }
     }
 }
