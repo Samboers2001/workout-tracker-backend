@@ -28,5 +28,29 @@ namespace workout_tracker_backend.Helpers
                 return false;
             }
         }
-    }
+
+        public bool EmailIsEmpty(string email)
+        {
+            if (string.IsNullOrEmpty(email))
+            {
+                return false;
+            }
+            return true;
+        }
+        public bool PasswordIsEmpty(string password)
+        {
+            if (string.IsNullOrEmpty(password))           
+            {
+                return false;
+            }
+            return true;
+        }
+        public bool NameIsEmpty(string name)
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                return false;
+            }
+            return true;
+        }    }
 }
