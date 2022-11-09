@@ -45,6 +45,11 @@ namespace workout_tracker_backend.Controllers
         public ActionResult Authenticate(AuthenticateRequest authenticateRequest)
         {
             var response = _repository.Authenticate(authenticateRequest);
+
+            if (response == null) 
+            {
+                return BadRequest(new { message = "Username or password is incorrect" });
+            }
             return Ok(response);
         }
     }
