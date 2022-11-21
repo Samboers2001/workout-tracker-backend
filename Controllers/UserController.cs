@@ -2,6 +2,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using workout_tracker_backend.Interfaces;
 using workout_tracker_backend.Dtos;
+using workout_tracker_backend.Models;
 
 namespace workout_tracker_backend.Controllers
 {
@@ -19,6 +20,15 @@ namespace workout_tracker_backend.Controllers
             _repository = repository;
             _mapper = mapper;
         }
+
+        //GET api/user
+        [HttpGet]
+        public ActionResult<IEnumerable<User>> GetAllUsers()
+        {
+            var users = _repository.GetAllUsers();
+            return Ok(_mapper.Map<IEnumerable<UserReadDto>>(users));
+        }
+
 
         //GET api/user{id}
         [HttpGet("{id}")]
@@ -46,7 +56,7 @@ namespace workout_tracker_backend.Controllers
         {
             var response = _repository.Authenticate(authenticateRequest);
 
-            if (response == null) 
+            if (response == null)
             {
                 return BadRequest(new { message = "Username or password is incorrect" });
             }

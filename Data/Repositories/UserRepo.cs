@@ -16,7 +16,6 @@ namespace workout_tracker_backend.Repositories
     {
         private readonly WorkoutTrackerDbContext _context;
         private readonly IMapper _mapper;
-        public readonly IJwtUtils _jwtUtils;
         Lib lib = new Lib();
         private readonly AppSettings _appSettings;
 
@@ -27,6 +26,12 @@ namespace workout_tracker_backend.Repositories
             _mapper = mapper;
             _appSettings = appSettings.Value;
         }
+
+        public IEnumerable<User> GetAllUsers()
+        {
+            return _context.Users.ToList();
+        }
+
         public User GetUserById(int UserId)
         {
             return _context.Users.FirstOrDefault(u => u.Id == UserId);
@@ -70,9 +75,9 @@ namespace workout_tracker_backend.Repositories
             User user = _context.Users.SingleOrDefault(x => x.Email == authenticateRequest.Email && x.Password == authenticateRequest.Password);
 
             if (user == null) return null;
-
-            var token = generateJwtToken(user);
-            return new AuthenticateResponse(user, token);
+            var response = _mapper.Map<AuthenticateResponse>(user);
+            response.Token = generateJwtToken(user);
+            return response;
         }
 
         
