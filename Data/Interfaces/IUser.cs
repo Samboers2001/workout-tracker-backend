@@ -9,7 +9,8 @@ namespace workout_tracker_backend.Interfaces
         User GetUserById(int Id);
         AuthenticateResponse Authenticate(AuthenticateRequest authenticateRequest);
         IEnumerable<User> GetAllUsers();
-        
+        bool DeleteUser(User user);
+        bool SaveChanges();
 
     }
 }

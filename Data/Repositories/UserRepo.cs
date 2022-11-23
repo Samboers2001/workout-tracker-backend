@@ -80,7 +80,7 @@ namespace workout_tracker_backend.Repositories
             return response;
         }
 
-        
+
         private string generateJwtToken(User user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -93,6 +93,21 @@ namespace workout_tracker_backend.Repositories
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
+        }
+
+        public bool DeleteUser(User user)
+        {
+            if (user == null)
+            {
+
+            }
+            _context.Users.Remove(user);
+            return _context.SaveChanges() == 1;
+        }
+
+        public bool SaveChanges()
+        {
+            return (_context.SaveChanges() >= 0);
         }
     }
 }

@@ -30,7 +30,7 @@ namespace workout_tracker_backend.Controllers
         }
 
 
-        //GET api/user{id}
+        //GET api/user/{id}
         [HttpGet("{id}")]
         public ActionResult<UserReadDto> GetUserById(int Id)
         {
@@ -61,6 +61,21 @@ namespace workout_tracker_backend.Controllers
                 return BadRequest(new { message = "Username or password is incorrect" });
             }
             return Ok(response);
+        }
+
+        //DELETE api/user/{id}
+        [HttpDelete("{id}")]
+        public ActionResult DeleteUserById(int Id)
+        {
+            var loggedInUser = _repository.GetUserById(Id);
+            if (loggedInUser == null)
+            {
+                return NotFound();
+            }
+
+            _repository.DeleteUser(loggedInUser);
+            _repository.SaveChanges();
+            return NoContent();
         }
     }
 }
