@@ -1,3 +1,4 @@
+using System.Net.WebSockets;
 using Microsoft.EntityFrameworkCore;
 using workout_tracker_backend.Authorization;
 using workout_tracker_backend.Data;
@@ -39,6 +40,21 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseWebSockets();
+
+app.Use(async (context, next) => 
+{
+    if(context.WebSockets.IsWebSocketRequest)
+    {
+        WebSocket webSocket = await context.WebSockets.AcceptWebSocketAsync();
+        Console.WriteLine("Websocket Connected");
+    }
+    else
+    {
+        await next();
+    }
+});
 
 app.UseHttpsRedirection();
 
