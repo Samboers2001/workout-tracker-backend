@@ -20,6 +20,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
 builder.Services.AddScoped<IExercise, ExerciseRepo>();
 builder.Services.AddScoped<IUser, UserRepo>();
+builder.Services.AddWebSocketManager();
 builder.Services.AddDbContext<WorkoutTrackerDbContext>(options => options.UseSqlite(Configurations.GetConnectionString("WorkoutTrackerConnection")));
 builder.Services.AddCors(options =>
 {
