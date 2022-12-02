@@ -43,18 +43,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseWebSockets();
 
-app.Use(async (context, next) => 
-{
-    if(context.WebSockets.IsWebSocketRequest)
-    {
-        WebSocket webSocket = await context.WebSockets.AcceptWebSocketAsync();
-        Console.WriteLine("Websocket Connected");
-    }
-    else
-    {
-        await next();
-    }
-});
+app.UseWebSocketServer();
 
 app.UseHttpsRedirection();
 
