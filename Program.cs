@@ -21,6 +21,7 @@ builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSet
 builder.Services.AddScoped<IExercise, ExerciseRepo>();
 builder.Services.AddScoped<IUser, UserRepo>();
 builder.Services.AddWebSocketManager();
+builder.Services.AddLeaderboardController();
 builder.Services.AddDbContext<WorkoutTrackerDbContext>(options => options.UseSqlite(Configurations.GetConnectionString("WorkoutTrackerConnection")));
 builder.Services.AddCors(options =>
 {

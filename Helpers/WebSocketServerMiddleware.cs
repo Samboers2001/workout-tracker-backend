@@ -5,7 +5,7 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
-
+using workout_tracker_backend.Controllers;
 
 namespace workout_tracker_backend.Helpers
 {
@@ -13,15 +13,18 @@ namespace workout_tracker_backend.Helpers
     {
         private readonly RequestDelegate _next;
         private readonly WebSocketServerConnectionManager _manager;
+        private readonly LeaderBoardController _leaderboardController;
 
-        public WebSocketServerMiddleware(RequestDelegate next, WebSocketServerConnectionManager manager)
+        public WebSocketServerMiddleware(RequestDelegate next, WebSocketServerConnectionManager manager, LeaderBoardController leaderBoardController)
         {
             _next = next;
             _manager = manager;
+            _leaderboardController = leaderBoardController;
         }
 
         public async Task InvokeAsync(HttpContext context)
         {
+            Random random = new Random();
             if (context.WebSockets.IsWebSocketRequest)
             {
                 WebSocket webSocket = await context.WebSockets.AcceptWebSocketAsync();
@@ -29,7 +32,11 @@ namespace workout_tracker_backend.Helpers
 
                 string ConnId = _manager.AddSocket(webSocket);
                 await SendConnIdAsync(webSocket, ConnId);
-
+                for (int i = 0; i < 50; i++)
+                {
+                    _leaderboardController.UpdateLeaderboardWihUserData();
+                    Thread.Sleep(random.Next(10,1000));
+                }
                 await ReceiveMessage(webSocket, async (result, buffer) =>
                 {
                     if (result.MessageType == WebSocketMessageType.Text)

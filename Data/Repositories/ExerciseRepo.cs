@@ -27,7 +27,6 @@ namespace workout_tracker_backend.Repositories
         public bool SaveChanges()
         {
             return (_context.SaveChanges() >= 0);
-
         }
     }
 }
