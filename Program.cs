@@ -20,6 +20,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
 builder.Services.AddScoped<IExercise, ExerciseRepo>();
 builder.Services.AddScoped<IUser, UserRepo>();
+builder.Services.AddScoped<IWorkoutSession, WorkoutSessionRepo>();
 builder.Services.AddWebSocketManager();
 builder.Services.AddLeaderboardController();
 builder.Services.AddDbContext<WorkoutTrackerDbContext>(options => options.UseSqlite(Configurations.GetConnectionString("WorkoutTrackerConnection")));
@@ -28,7 +29,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("MyAllowedOrigins",
     policy =>
     {
-        policy.WithOrigins("http://localhost:8080").AllowAnyHeader();
+        policy.WithOrigins("http://localhost:8080").AllowAnyHeader().AllowAnyMethod();
     });
 });
 

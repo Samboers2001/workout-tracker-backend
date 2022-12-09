@@ -3,12 +3,13 @@ using Microsoft.AspNetCore.Mvc;
 using workout_tracker_backend.Interfaces;
 using workout_tracker_backend.Dtos;
 using workout_tracker_backend.Models;
+using workout_tracker_backend.Helpers;
+using Microsoft.AspNetCore.Authorization;
 
 namespace workout_tracker_backend.Controllers
 {
     [Route("api/user")]
     [ApiController]
-
     public class UserController : ControllerBase
     {
         private readonly IUser _repository;
