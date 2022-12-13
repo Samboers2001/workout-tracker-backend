@@ -4,7 +4,6 @@ using workout_tracker_backend.Interfaces;
 using workout_tracker_backend.Dtos;
 using workout_tracker_backend.Models;
 using workout_tracker_backend.Helpers;
-using Microsoft.AspNetCore.Authorization;
 
 namespace workout_tracker_backend.Controllers
 {
@@ -23,6 +22,7 @@ namespace workout_tracker_backend.Controllers
         }
 
         //GET api/user
+        [Authorize]
         [HttpGet]
         public ActionResult<IEnumerable<User>> GetAllUsers()
         {
@@ -32,6 +32,7 @@ namespace workout_tracker_backend.Controllers
 
 
         //GET api/user/{id}
+        [Authorize]
         [HttpGet("{id}")]
         public ActionResult<UserReadDto> GetUserById(int Id)
         {
@@ -65,6 +66,7 @@ namespace workout_tracker_backend.Controllers
         }
 
         //DELETE api/user/{id}
+        [Authorize]
         [HttpDelete("{id}")]
         public ActionResult DeleteUserById(int Id)
         {

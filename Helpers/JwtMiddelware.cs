@@ -8,7 +8,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 
-namespace workout_tracker_backend.Authorization
+namespace workout_tracker_backend.Helpers
 {
 public class JwtMiddleware
 {

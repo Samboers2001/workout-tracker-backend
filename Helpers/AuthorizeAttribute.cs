@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using System;
 using System.Linq;
 
-namespace workout_tracker_backend.Authorization
+namespace workout_tracker_backend.Helpers
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
     public class AuthorizeAttribute : Attribute, IAuthorizationFilter

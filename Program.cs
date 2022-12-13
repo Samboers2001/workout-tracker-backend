@@ -1,6 +1,5 @@
 using System.Net.WebSockets;
 using Microsoft.EntityFrameworkCore;
-using workout_tracker_backend.Authorization;
 using workout_tracker_backend.Data;
 using workout_tracker_backend.Helpers;
 using workout_tracker_backend.Interfaces;
