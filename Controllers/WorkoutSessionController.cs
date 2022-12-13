@@ -1,6 +1,7 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using workout_tracker_backend.Dtos;
+using workout_tracker_backend.Helpers;
 using workout_tracker_backend.Interfaces;
 using workout_tracker_backend.Models;
 
@@ -20,6 +21,7 @@ namespace workout_tracker_backend.Controllers
         }
 
         // POST api/workoutsession/create
+        [Authorize]
         [HttpPost("create")]
         public ActionResult CreateWorkout(CreateWorkoutDto createWorkoutDto)
         {
