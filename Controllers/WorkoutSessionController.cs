@@ -23,7 +23,7 @@ namespace workout_tracker_backend.Controllers
         // POST api/workoutsession/create
         [Authorize]
         [HttpPost("create")]
-        public ActionResult CreateWorkout(CreateWorkoutDto createWorkoutDto)
+        public ActionResult CreateWorkout(CreateWorkoutSessionDto createWorkoutDto)
         {
             var loggedInUser = (User)HttpContext.Items["User"];
             WorkoutSession workoutSession = _repository.CreateWorkout(loggedInUser.Id, createWorkoutDto.Name);

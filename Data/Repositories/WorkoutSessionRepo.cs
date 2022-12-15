@@ -26,11 +26,5 @@ namespace workout_tracker_backend.Repositories
             _context.SaveChanges();
             return workoutSession;
         }
-        public ExerciseSession AddExerciseSession(ExerciseSession exerciseSession)
-        {
-            throw new NotImplementedException();
-        }
-
-
     }
 }
